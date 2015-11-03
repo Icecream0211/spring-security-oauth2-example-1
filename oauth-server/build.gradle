@@ -1,0 +1,46 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE")
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+  baseName = 'oauth-server'
+  version =  '1.0'
+}
+
+ext {
+  springVersion = "1.2.7.RELEASE"
+}
+
+repositories {
+  mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:$springVersion")
+    compile("org.springframework.boot:spring-boot-starter-actuator:$springVersion")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf:$springVersion")
+    compile("org.springframework.boot:spring-boot-starter-jdbc:$springVersion")
+    compile("org.springframework.boot:spring-boot-starter-logging:$springVersion")
+    compile("org.springframework.boot:spring-boot-starter-jta-bitronix:$springVersion")
+    compile("org.springframework.security.oauth:spring-security-oauth2:2.0.8.RELEASE")
+
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.4.6")
+    compile("com.h2database:h2:1.4.190")
+    compile("org.flywaydb:flyway-core:3.2.1")
+    compile("com.google.guava:guava:18.0")
+    
+    testCompile("junit:junit")
+}
