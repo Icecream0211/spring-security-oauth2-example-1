@@ -2,8 +2,10 @@
 
 (function() {
 
-  function WelcomeController($location, $window, $scope) {
+  function WelcomeController(UserService, $location, $window, $scope) {
     var self = this;
+
+    self.userService = UserService;
 
     $scope.$on('forbiddenRequest', function(event, error) {
       self.error = error;
@@ -20,8 +22,16 @@
     }
   }
 
+  function UserService($rootScope) {
+    var self = this;
+    $rootScope.$on('loggedIn', function(event, loggedInUser) {
+      self.user = loggedInUser;
+    });
+  }
+
   var app = angular.module('app', [])
     .controller('WelcomeController', WelcomeController)
+    .service('UserService', UserService)
     .config(function($locationProvider, $httpProvider) {
       $locationProvider.html5Mode({enabled: true, requireBase: false}).hashPrefix('#!');
       var token = localStorage.getItem('oauthToken');
@@ -48,9 +58,9 @@
       }
       $location.hash('');
     })
-    .run(function($http) {
+    .run(function($http, $rootScope) {
       $http.get('http://localhost:8080/me').then(function(response) {
-        console.log(response.data);
+        $rootScope.$broadcast('loggedIn', response.data);
       });
     });
 })();

@@ -34,10 +34,12 @@
                 <div class="input-group" style="width:340px;text-align:center;margin:0 auto;">
                     <button type="button" class="btn btn-success btn-lg btn-block" ng-click="welcome.gotoProviderLogin()">Login with Provider</button>
                 </div>
-                <div style="margin-top: 20px">
-                    <small ng-bind="welcome.unauthorized.link"></small>
-                </div>
             </form>
+
+            <div ng-if="!welcome.unauthorized">
+                <h2>Hello {{welcome.userService.user.principal}}</h2>
+            </div>
+
         </div>
     </div> <!-- /row -->
 </div> <!-- /container full -->
