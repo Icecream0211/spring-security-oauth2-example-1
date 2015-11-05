@@ -4,3 +4,4 @@ build
 *.iml
 **/build
 **/*.iml
+*-transaction-logs

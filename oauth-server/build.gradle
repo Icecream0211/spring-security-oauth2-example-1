@@ -41,6 +41,7 @@ dependencies {
     compile("com.h2database:h2:1.4.190")
     compile("org.flywaydb:flyway-core:3.2.1")
     compile("com.google.guava:guava:18.0")
-    
+    compile("com.github.alexheretic:dynamics:1.2")
+
     testCompile("junit:junit")
 }
